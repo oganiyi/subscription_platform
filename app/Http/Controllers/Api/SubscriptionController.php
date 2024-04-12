@@ -41,8 +41,18 @@ class SubscriptionController extends Controller
     {
         $request->validate([
             'website' => 'required|exists:websites,id',
-            'user' => 'required|exists:users,id'
+            'user' => [
+                'required', 'exists:users,id', function ($attribute, $value, $fail) use ($request) {
+                    $exist = Subscriber::where(['website_id' => $request->website, 'user' => $value])->exists();
+
+                    if ($exist) {
+                        $fail("You have already subscribed to our website.");
+                    }
+                }
+            ]
         ]);
+
+        $exist = 
 
         $subscriber = Subscriber::create([
             'website_id' => $request->website,
