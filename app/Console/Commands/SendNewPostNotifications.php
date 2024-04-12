@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\SendEmailToSubscriber;
 use App\Models\Website;
 use Illuminate\Console\Command;
 
@@ -30,7 +31,7 @@ class SendNewPostNotifications extends Command
     {
 
         // get all websites with their subscribers and get the posts that have not been sent yet to avoid duplication
-        $websites = Website::with(['subscribers', 'posts' => function ($query) {
+        $websites = Website::with(['subscribers.user', 'posts' => function ($query) {
             $query->where('email_sent', false);
         }])->get();
 
@@ -40,14 +41,14 @@ class SendNewPostNotifications extends Command
             foreach ($website->posts as $post) {
                 // send the post to the website subscribers
                 foreach ($website->subscribers as $subscriber) {
-
+                    SendEmailToSubscriber::dispatch($subscriber, $post);
+                    // update the post that it has been sent already to avoid duplicate in the future
+                    $post->email_sent = true;
+                    $post->update();
                 }
 
-                // update the post that it has been sent already to avoid duplicate in the future
-                $post->email_sent = true;
-                $post->update();
             }
         }
-        return Command::SUCCESS;
+        $this->info("Email sent to subscribers for new posts");
     }
 }

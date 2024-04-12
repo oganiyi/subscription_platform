@@ -1,0 +1,132 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/post:
+    post:
+      summary: 'Store Post for a website.'
+      operationId: storePostForAWebsite
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: 'true'
+                  message: 'Post created successfully'
+                properties:
+                  success:
+                    type: string
+                    example: 'true'
+                  message:
+                    type: string
+                    example: 'Post created successfully'
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                website:
+                  type: integer
+                  description: 'The ID of the website.'
+                  example: 2
+                title:
+                  type: string
+                  description: 'The title of the branpostch.'
+                  example: 'New Post'
+                description:
+                  type: string
+                  description: 'The description of the post.'
+                  example: 'This is a description'
+              required:
+                - website
+                - title
+                - description
+      security: []
+  /api/subscribe:
+    post:
+      summary: 'Subscribe to a website.'
+      operationId: subscribeToAWebsite
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: 'true'
+                  message: 'You have successfully subscribed to Sell Codes website'
+                properties:
+                  success:
+                    type: string
+                    example: 'true'
+                  message:
+                    type: string
+                    example: 'You have successfully subscribed to Sell Codes website'
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                website:
+                  type: integer
+                  description: 'The ID of the website.'
+                  example: 2
+                user:
+                  type: integer
+                  description: 'The ID of the user.'
+                  example: 2
+              required:
+                - website
+                - user
+      security: []
+  /api/send-posts:
+    post:
+      summary: 'Command for sending email for new posts.'
+      operationId: commandForSendingEmailForNewPosts
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: 'true'
+                  message: 'Email sent to subscribers for new posts'
+                properties:
+                  success:
+                    type: string
+                    example: 'true'
+                  message:
+                    type: string
+                    example: 'Email sent to subscribers for new posts'
+      tags:
+        - Endpoints
+      security: []
+tags:
+  -
+    name: Endpoints
+    description: ''

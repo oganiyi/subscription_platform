@@ -29,7 +29,11 @@ class PostController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store Post for a website.
+     * @bodyParam website int required The ID of the website. Example: 2
+     * @bodyParam title string required The title of the branpostch. Example: New Post
+     * @bodyParam description string required The description of the post. Example: This is a description
+     * @response {"success" : "true", "message" : "Post created successfully"} 
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response

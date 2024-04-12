@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Api\PostController;
-use App\Http\Controllers\Api\SubscriptionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\PostController;
+use App\Http\Controllers\Api\CommandController;
+use App\Http\Controllers\Api\SubscriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,5 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/post', [PostController::class, 'store']);
 Route::post('/subscribe', [SubscriptionController::class, 'subscribe']);
+Route::post('/send-posts', [CommandController::class, 'sendPostNotifications']);
+
 
 

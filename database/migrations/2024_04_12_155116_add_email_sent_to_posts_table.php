@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->boolean('email_sent')->default(false);
+            $table->boolean('email_sent')->default(false)->after('description');
         });
     }
 

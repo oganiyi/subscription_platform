@@ -29,7 +29,10 @@ class SubscriptionController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Subscribe to a website.
+     * @bodyParam website int required The ID of the website. Example: 2
+     * @bodyParam user int required The ID of the user. Example: 2
+     * @response {"success" : "true", "message" : "You have successfully subscribed to Sell Codes website"} 
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
